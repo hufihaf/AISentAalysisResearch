@@ -20,6 +20,8 @@ Output:
 
 import re
 from collections import defaultdict
+import nltk
+nltk.download('cmudict')
 
 import pandas as pd
 import nltk
@@ -32,7 +34,7 @@ except LookupError:
 
 PRON_DICT = cmudict.dict()
 
-EMOLEX_PATH = "NRC-Emotion-Lexicon-Wordlevel-v0.92.txt"  # <-- update to your file path
+EMOLEX_PATH = "AISentAalysisResearch/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt"  # <-- update to your file path
 OUTPUT_CSV = "vowel_phoneme_emotion_averages.csv"
 OUTPUT_WORDLIST_CSV = "vowel_phoneme_wordlists.csv"  # optional: which words fed each vowel
 
@@ -57,7 +59,7 @@ def load_emolex(path):
     return word_scores
 
 
-def get_monosyllabic_vowel(word, use_first_pron_only=True):
+def get_monosyllabic_vowel(word, use_first_pron_only=False):
     """
     Return the (stress-stripped) ARPABET vowel phoneme for a word if it is
     monosyllabic according to CMUdict, else None.
